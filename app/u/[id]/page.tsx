@@ -3,7 +3,8 @@ import { createClient } from '@/lib/supabase/server'
 import { ReviewCard } from '@/components/review-card'
 import { User } from 'lucide-react'
 
-export default async function UserProfilePage({ params }: { params: { id: string } }) {
+export default async function UserProfilePage(props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     const supabase = await createClient()
 
     const { data: profile } = await supabase

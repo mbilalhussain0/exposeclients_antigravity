@@ -31,6 +31,22 @@ export async function createReview(formData: FormData) {
         return { error: 'You must be logged in to post a review.' }
     }
 
+    // Ensure profile exists
+    let { data: profile } = await supabase.from('profiles').select('id').eq('id', user.id).single()
+    if (!profile) {
+        // Create profile if missing
+        const { error: profileError } = await supabase.from('profiles').insert({
+            id: user.id,
+            display_name: user.email?.split('@')[0] || 'Anonymous',
+        })
+        if (profileError) {
+            // Ignore duplicate key error in case of race condition
+            if (profileError.code !== '23505') {
+                return { error: 'Failed to create user profile: ' + profileError.message }
+            }
+        }
+    }
+
     // Parse data
     const rawData = {
         clientName: formData.get('clientName'),

@@ -6,12 +6,11 @@ import { Search } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: { q?: string }
+export default async function Home(props: {
+  searchParams: Promise<{ q?: string }>
 }) {
   const supabase = await createClient()
+  const searchParams = await props.searchParams
   const query = searchParams.q
 
   let reviewsQuery = supabase

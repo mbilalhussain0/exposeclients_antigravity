@@ -27,23 +27,23 @@ export function ReviewCard({ review }: { review: ReviewWithDetails }) {
     const r = review
 
     return (
-        <Card>
+        <Card className="overflow-hidden transition-all hover:shadow-md hover:border-primary/20">
             <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
                 <div className="flex flex-col gap-1">
-                    <Link href={`/clients/${r.client?.slug}`} className="font-semibold hover:underline">
+                    <Link href={`/clients/${r.client?.slug}`} className="font-semibold text-lg hover:underline decoration-primary/50 underline-offset-4">
                         {r.client?.name}
                     </Link>
-                    <span className="text-xs text-slate-500">{r.client?.country}</span>
+                    <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{r.client?.country}</span>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center rounded-full bg-secondary px-2 py-1">
                     {r.rating && (
-                        <div className="flex">
+                        <div className="flex gap-0.5">
                             {[...Array(5)].map((_, i) => (
                                 <Star
                                     key={i}
                                     className={cn(
-                                        "h-4 w-4",
-                                        i < r.rating! ? "fill-orange-400 text-orange-400" : "fill-slate-100 text-slate-200"
+                                        "h-3.5 w-3.5",
+                                        i < r.rating! ? "fill-orange-500 text-orange-500" : "fill-muted text-muted-foreground/30"
                                     )}
                                 />
                             ))}
@@ -52,18 +52,25 @@ export function ReviewCard({ review }: { review: ReviewWithDetails }) {
                 </div>
             </CardHeader>
             <CardContent>
-                <p className="text-sm text-slate-700 whitespace-pre-wrap">{r.body}</p>
-                <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
-                    <div className="flex items-center gap-1">
-                        <User className="h-3 w-3" />
+                <div className="prose prose-sm dark:prose-invert text-sm text-foreground/80 line-clamp-4 leading-relaxed mb-4">
+                    {r.body}
+                </div>
+                <div className="flex items-center gap-3 border-t pt-4 mt-auto text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1.5 font-medium">
+                        <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <User className="h-3.5 w-3.5" />
+                        </div>
                         <span>{r.author?.display_name || 'Anonymous'}</span>
                     </div>
-                    <span>•</span>
-                    <time>{new Date(r.created_at).toLocaleDateString()}</time>
+                    <span className="text-muted-foreground/30">•</span>
+                    <time dateTime={r.created_at} className="font-mono text-[10px] uppercase">
+                        {new Date(r.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </time>
                     {r.platform && (
                         <>
-                            <span>•</span>
-                            <span>{r.platform?.name}</span>
+                            <span className="ml-auto flex items-center gap-1 rounded-sm bg-accent px-1.5 py-0.5">
+                                {r.platform?.name}
+                            </span>
                         </>
                     )}
                 </div>

@@ -5,7 +5,8 @@ import CommentForm from '@/components/comment-form'
 import CommentList from '@/components/comment-list'
 import { Separator } from '@/components/ui/separator'
 
-export default async function ReviewPage({ params }: { params: { id: string } }) {
+export default async function ReviewPage(props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 

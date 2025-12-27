@@ -48,6 +48,9 @@ export async function signup(prevState: unknown, formData: FormData) {
         password,
         options: {
             emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`,
+            data: {
+                display_name: email.split('@')[0],
+            }
         },
     })
 

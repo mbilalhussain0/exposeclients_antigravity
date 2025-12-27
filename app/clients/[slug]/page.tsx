@@ -5,7 +5,8 @@ import { ReviewCard } from '@/components/review-card'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 
-export default async function ClientPage({ params }: { params: { slug: string } }) {
+export default async function ClientPage(props: { params: Promise<{ slug: string }> }) {
+    const params = await props.params;
     const supabase = await createClient()
 
     const { data: client } = await supabase
