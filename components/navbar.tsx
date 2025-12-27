@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Button } from './ui/button'
 
 export default async function Navbar() {
-    const supabase = createClient()
+    const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
     return (

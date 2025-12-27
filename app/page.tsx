@@ -11,7 +11,7 @@ export default async function Home({
 }: {
   searchParams: { q?: string }
 }) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const query = searchParams.q
 
   let reviewsQuery = supabase
@@ -39,7 +39,7 @@ export default async function Home({
           Freelancer Reviews
         </h1>
         <p className="text-muted-foreground">
-          Check your client's history before you start working.
+          Check your client&apos;s history before you start working.
         </p>
         <form action="/" method="get" className="flex items-center gap-2">
           <div className="relative flex-1">

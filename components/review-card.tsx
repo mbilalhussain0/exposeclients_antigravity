@@ -23,10 +23,8 @@ type ReviewWithDetails = {
     } | null
 }
 
-export function ReviewCard({ review }: { review: any }) {
-    // using any for now to bypass strict typing of join result 
-    // until we have proper generated types or complex manual type
-    const r = review as ReviewWithDetails
+export function ReviewCard({ review }: { review: ReviewWithDetails }) {
+    const r = review
 
     return (
         <Card>

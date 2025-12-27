@@ -1,7 +1,15 @@
-import { formatDistanceToNow } from 'date-fns' // wait I don't have date-fns, use simple logic or install
+// import { formatDistanceToNow } from 'date-fns'
 // I'll use simple Date logic to avoid install
 
-export default function CommentList({ comments }: { comments: any[] }) {
+type Comment = {
+    id: string
+    created_at: string
+    body: string
+    author: { display_name: string | null } | null
+    anonymous_name: string | null
+}
+
+export default function CommentList({ comments }: { comments: Comment[] }) {
     return (
         <div className="space-y-6">
             {comments.map(comment => (

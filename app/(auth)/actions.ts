@@ -10,7 +10,7 @@ const authSchema = z.object({
     password: z.string().min(6),
 })
 
-export async function login(prevState: any, formData: FormData) {
+export async function login(prevState: unknown, formData: FormData) {
     const email = formData.get('email') as string
     const password = formData.get('password') as string
 
@@ -19,7 +19,7 @@ export async function login(prevState: any, formData: FormData) {
         return { error: 'Invalid email or password' }
     }
 
-    const supabase = createClient()
+    const supabase = await createClient()
     const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -33,7 +33,7 @@ export async function login(prevState: any, formData: FormData) {
     redirect('/')
 }
 
-export async function signup(prevState: any, formData: FormData) {
+export async function signup(prevState: unknown, formData: FormData) {
     const email = formData.get('email') as string
     const password = formData.get('password') as string
 
@@ -42,7 +42,7 @@ export async function signup(prevState: any, formData: FormData) {
         return { error: 'Invalid email or password' }
     }
 
-    const supabase = createClient()
+    const supabase = await createClient()
     const { error } = await supabase.auth.signUp({
         email,
         password,

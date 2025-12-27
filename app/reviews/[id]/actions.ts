@@ -11,7 +11,7 @@ const commentSchema = z.object({
 })
 
 export async function postComment(formData: FormData) {
-    const supabase = createClient()
+    const supabase = await createClient()
     const reviewId = formData.get('reviewId') as string
     const body = formData.get('body') as string
     const anonymousName = formData.get('anonymousName') as string
@@ -23,7 +23,7 @@ export async function postComment(formData: FormData) {
 
     const { data: { user } } = await supabase.auth.getUser()
 
-    const insertData: any = {
+    const insertData: { review_id: string; body: string; author_id?: string; anonymous_name?: string } = {
         review_id: reviewId,
         body: body,
     }

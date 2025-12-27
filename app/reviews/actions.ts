@@ -23,7 +23,7 @@ function generateSlug(name: string, country: string) {
 }
 
 export async function createReview(formData: FormData) {
-    const supabase = createClient()
+    const supabase = await createClient()
 
     // Auth check
     const { data: { user } } = await supabase.auth.getUser()

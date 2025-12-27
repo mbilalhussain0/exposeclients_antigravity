@@ -1,13 +1,14 @@
 'use client'
 
 import { useRef, useState } from 'react'
+import { User } from '@supabase/supabase-js'
 import { postComment } from '@/app/reviews/[id]/actions'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
-export default function CommentForm({ reviewId, user }: { reviewId: string, user: any }) {
+export default function CommentForm({ reviewId, user }: { reviewId: string, user: User | null }) {
     const ref = useRef<HTMLFormElement>(null)
     const [loading, setLoading] = useState(false)
 

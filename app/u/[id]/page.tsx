@@ -4,7 +4,7 @@ import { ReviewCard } from '@/components/review-card'
 import { User } from 'lucide-react'
 
 export default async function UserProfilePage({ params }: { params: { id: string } }) {
-    const supabase = createClient()
+    const supabase = await createClient()
 
     const { data: profile } = await supabase
         .from('profiles')
@@ -51,7 +51,7 @@ export default async function UserProfilePage({ params }: { params: { id: string
                         <ReviewCard key={review.id} review={review} />
                     ))}
                     {reviews?.length === 0 && (
-                        <p className="text-slate-500">This user hasn't posted any reviews yet.</p>
+                        <p className="text-slate-500">This user hasn&apos;t posted any reviews yet.</p>
                     )}
                 </div>
             </div>

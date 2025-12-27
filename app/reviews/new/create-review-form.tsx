@@ -7,10 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { X } from 'lucide-react'
 
-export default function CreateReviewForm({ platforms }: { platforms: any[] }) {
+export default function CreateReviewForm({ platforms }: { platforms: { id: string; name: string }[] }) {
     const [loading, setLoading] = useState(false)
     const [files, setFiles] = useState<File[]>([])
     const [error, setError] = useState<string | null>(null)

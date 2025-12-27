@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 
 export default async function ClientPage({ params }: { params: { slug: string } }) {
-    const supabase = createClient()
+    const supabase = await createClient()
 
     const { data: client } = await supabase
         .from('clients')

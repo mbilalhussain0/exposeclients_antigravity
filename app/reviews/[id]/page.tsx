@@ -3,10 +3,10 @@ import { createClient } from '@/lib/supabase/server'
 import { ReviewCard } from '@/components/review-card'
 import CommentForm from '@/components/comment-form'
 import CommentList from '@/components/comment-list'
-import { Separator } from '@/components/ui/separator' // Don't have separator, use <hr> or div
+import { Separator } from '@/components/ui/separator'
 
 export default async function ReviewPage({ params }: { params: { id: string } }) {
-    const supabase = createClient()
+    const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
     const { data: review } = await supabase
@@ -56,7 +56,8 @@ export default async function ReviewPage({ params }: { params: { id: string } })
                 </div>
             )}
 
-            <div className="border-t pt-8">
+            <Separator className="my-8" />
+            <div>
                 <h3 className="mb-6 text-xl font-semibold">Comments ({comments?.length || 0})</h3>
                 <CommentList comments={comments || []} />
                 <div className="mt-8">

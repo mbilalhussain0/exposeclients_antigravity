@@ -1,6 +1,5 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority" // Wait I didn't install cva or radix-slot. 
+// Imports removed manually to avoid dependency issues 
 // Standard without those deps for now to minimize install calls, or I should install them.
 // "senior full-stack engineer" -> uses shadcn/ui or similar usually involves these deps.
 // I'll stick to simple tailwind components to avoid extra dependency management unless necessary.
